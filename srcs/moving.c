@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/21 16:55:36 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:27:07 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 int left_and_right_movement(t_game *game, int button);
 int up_and_down_movement(t_game *game, int button);
+int check_exit_game(t_game *game, int y, int x);
 
-void keys_moves(mlx_key_data_t keydata, t_game *game)
+void keys_moves(mlx_key_data_t keydata, void *param)
 {
 	int move;
-
+	t_game *game;
+	
+	game = (t_game *)param;
 	move = 0;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{	
@@ -42,6 +45,7 @@ void keys_moves(mlx_key_data_t keydata, t_game *game)
 int up_and_down_movement(t_game *game, int button)
 {
 	int temp;
+	int exit_temp;
 
 	temp = game->y;
 	if (button == MLX_KEY_W || button == MLX_KEY_UP)
@@ -50,14 +54,19 @@ int up_and_down_movement(t_game *game, int button)
 		temp++;
 	if (temp >= 0 && temp < game->height_map && game->map[temp][game->x] != '1')
 	{
+		if (game->map[temp][game->x] == 'C')
+		{
+			game->collectible_count--;
+			printf("Collectibles: %d\n", game->collectible_count);
+		}
+		exit_temp = game->x;
+		if (check_exit_game(game, temp, exit_temp) == 0)
+			return (0);
 		game->map[game->y][game->x] = '0';
 		game->y = temp;
 		game->map[game->y][game->x] = 'P';
-		if (game->map[temp][game->x] == 'C')
-		{
-			game->colletible_count--;
-			printf("Collectibles : %d", game->colletible_count);
-		}
+		game->steps_count++;
+		printf("Steps: %d\n", game->steps_count);
 		return (1);
 	}
 	return (0);
@@ -66,6 +75,7 @@ int up_and_down_movement(t_game *game, int button)
 int left_and_right_movement(t_game *game, int button)
 {
 	int temp;
+	int exit_temp;
 
 	temp = game->x;
 	if (button == MLX_KEY_A || button == MLX_KEY_LEFT)
@@ -74,15 +84,34 @@ int left_and_right_movement(t_game *game, int button)
 		temp++;
 	if (temp >= 0 && temp < game->width_map && game->map[game->y][temp] != '1')
 	{
+		if (game->map[game->y][temp] == 'C')
+		{
+			game->collectible_count--;
+			printf("Collectibles: %d\n", game->collectible_count);
+		}
+		exit_temp = game->y;
+		if (check_exit_game(game, exit_temp, temp) == 0)
+			return (0);
 		game->map[game->y][game->x] = '0';
 		game->x = temp;
 		game->map[game->y][game->x] = 'P';
-		if (game->map[game->y][game->x] == 'C')
-		{
-			game->colletible_count--;
-			printf("Collectibles : %d", game->colletible_count);
-		}
+		game->steps_count++;
+		printf("Steps: %d\n", game->steps_count);
 		return (1);
 	}
 	return (0);
+}
+int check_exit_game(t_game *game, int y, int x)
+{
+	if (game->map[y][x] == 'E' && game->collectible_count == 0)
+		{
+			printf("Congratulations Carlos!");
+			mlx_terminate(game->mlx);
+			exit(EXIT_SUCCESS);
+		}
+	else if (game->map[y][x] == 'E' && game->collectible_count != 0)
+	{
+		return (0);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:58:47 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/21 16:41:38 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:02:01 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_game
 	int map_fd;
 	int height_map;
 	int width_map;
-	int player_count;
-	int colletible_count;
+	int steps_count;
+	int collectible_count;
 	int exit_count;
 	int x;
 	int y;
@@ -49,6 +49,6 @@ void	ft_error(void);
 void 	map_reader(t_game *game, char *map);
 int 	add_map_line(t_game *game, char *next_line);
 int 	map_width(char *first_line);
-void	keys_moves(mlx_key_data_t keydata, t_game *game);
+void	keys_moves(mlx_key_data_t keydata, void *param);
 
 #endif
