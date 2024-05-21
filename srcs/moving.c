@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/21 20:27:07 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:34:44 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,17 @@ int up_and_down_movement(t_game *game, int button)
 		temp++;
 	if (temp >= 0 && temp < game->height_map && game->map[temp][game->x] != '1')
 	{
-		if (game->map[temp][game->x] == 'C')
-		{
-			game->collectible_count--;
-			printf("Collectibles: %d\n", game->collectible_count);
-		}
+		// if (game->map[temp][game->x] == 'C')
+		// {
+		// 	printf("Collectibles: %d\n", game->collectible_count);
+		// }
 		exit_temp = game->x;
 		if (check_exit_game(game, temp, exit_temp) == 0)
 			return (0);
 		game->map[game->y][game->x] = '0';
 		game->y = temp;
 		game->map[game->y][game->x] = 'P';
-		game->steps_count++;
+		game->steps_count = game->steps_count + 1;
 		printf("Steps: %d\n", game->steps_count);
 		return (1);
 	}
@@ -84,18 +83,17 @@ int left_and_right_movement(t_game *game, int button)
 		temp++;
 	if (temp >= 0 && temp < game->width_map && game->map[game->y][temp] != '1')
 	{
-		if (game->map[game->y][temp] == 'C')
-		{
-			game->collectible_count--;
-			printf("Collectibles: %d\n", game->collectible_count);
-		}
+		// if (game->map[game->y][temp] == 'C')
+		// {
+		// 	printf("Collectibles: %d\n", game->collectible_count);
+		// }
 		exit_temp = game->y;
 		if (check_exit_game(game, exit_temp, temp) == 0)
 			return (0);
 		game->map[game->y][game->x] = '0';
 		game->x = temp;
 		game->map[game->y][game->x] = 'P';
-		game->steps_count++;
+		game->steps_count = game->steps_count + 1;
 		printf("Steps: %d\n", game->steps_count);
 		return (1);
 	}

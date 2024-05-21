@@ -45,7 +45,7 @@
 		j = 0;
 
 		game->collectible_count = 0;
-		game->steps_count = 0;
+		// game->steps_count = 0;
 		while (i < game->height_map)
 		{
 			j = 0;
@@ -72,6 +72,7 @@
 			}
 			i++;
 		}
+		// game->steps_count++;
 		printf("Collectibles Left: %d\n", game->collectible_count);
 	}
 
