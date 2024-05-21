@@ -6,9 +6,11 @@
 #    By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 15:13:49 by eperperi          #+#    #+#              #
-#    Updated: 2024/05/16 16:18:53 by eperperi         ###   ########.fr        #
+#    Updated: 2024/05/21 13:48:53 by eperperi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+.SILENT:
 
 NAME	=	so_long
 
@@ -22,21 +24,34 @@ WHITE	=	\033[0m
 
 SRC_DIR	=	./srcs/
 OBJ_DIR	=	./objs/
+GNL_DIR =	./Get_next_line/
 
-SRC		=	$(SRC_DIR)so_long.c \
+SRC		 =	$(SRC_DIR)so_long.c \
+			$(SRC_DIR)graphics.c \
+			$(SRC_DIR)maping.c \
+			$(SRC_DIR)moving.c
+GNL_SRC  =	$(GNL_DIR)get_next_line.c $(GNL_DIR)get_next_line_utils.c 
 			
-OBJ		=	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
-LIB		=	Libft/libft.a
-MLX42	=	libmlx42.a
+OBJ		 =	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+GNL_OBJ	 =	$(GNL_SRC:$(GNL_DIR)%.c=$(OBJ_DIR)%.o)
+LIB		 =	Libft/libft.a
+MLX42	 =	libmlx42.a
 
-$(NAME): $(MLX42) $(OBJ)
-		@cd Libft && make
-		@$(CC) $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(MLX42) $(OBJ) $(LIB)
-		@echo "$(GREEN)so_long compiled!$(WHITE)"
+$(NAME): $(MLX42) $(OBJ) $(GNL_OBJ) $(LIB)
+		@$(MAKE) -C Libft
+		@$(CC) $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(MLX42) $(OBJ) $(LIB) $(GNL_OBJ)
+		@echo "$(GREEN)So_long compiled!$(WHITE)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
+	
+$(OBJ_DIR)%.o: $(GNL_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIB):
+	@$(MAKE) -C Libft
 
 $(MLX42):
 	@if [ ! -d "./MLX42" ]; then git clone https://github.com/codam-coding-college/MLX42.git; fi
@@ -50,23 +65,16 @@ cleanmlx:
 		@echo "$(CYAN)MLX42 folder is deleted!$(WHITE)"
 		
 clean:	
-		@cd Libft && make clean
+		@$(MAKE) -C Libft clean
 		@rm -rf $(OBJ_DIR)
-		@echo "$(CYAN)object files cleaned!$(WHITE)"
+		@echo "$(CYAN)Object files cleaned!$(WHITE)"
 
 fclean:	
-		@cd Libft && make clean
-		@rm -rf $(OBJ_DIR)
-		@cd Libft && make fclean
+		@$(MAKE) -C Libft fclean
 		@rm -f $(NAME)
 		@echo "$(CYAN)Executable and object files cleaned!$(WHITE)"
 
-cleanEverything:
-		@rm -rf MLX42
-		@cd Libft && make clean
-		@rm -rf $(OBJ_DIR)
-		@cd Libft && make fclean
-		@rm -f $(NAME)
+cleanEverything: fclean cleanmlx
 
 re:		fclean all
 

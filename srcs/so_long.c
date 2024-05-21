@@ -6,24 +6,23 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:31:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/16 19:41:16 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:47:51 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../so_long.h"
 
-// Written by Bruh
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "../MLX42.h"
-#define WIDTH 260
-#define HEIGHT 160
+#include "../so_long.h"
+#define WIDTH 800
+#define HEIGHT 800
 
 void key_hook(mlx_key_data_t keycode, void *param);
 
-static void ft_error(void)
+void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -37,83 +36,39 @@ static void ft_hook(void* param)
 }
 
 
-int32_t	main(void)
+int	main(int argc, char **argv)
 {
-	mlx_texture_t *texture;
-	mlx_image_t *image;
-
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Carlos_on_fire", true);
-	if (!mlx)
-		ft_error();
-		
-	texture = mlx_load_png("lala.png");
-	if (texture == NULL)
-	{
-		mlx_terminate(mlx);
-		ft_error();
-	}
+	int argv_len;
+	t_game game;
 	
-	image = mlx_texture_to_image(mlx, texture);
-	if (image == NULL)
+	if (argc != 2)
 	{
-		mlx_terminate(mlx);
-		ft_error();
+		printf("NOT THE RIGHT AMOUNT OF ARGUMENTS\n");
+		exit(EXIT_FAILURE);
 	}
+	argv_len = ft_strlen(argv[1]);	
+	if (ft_strncmp(argv[1]+ argv_len - 4, ".ber", 5) != 0)
+	{
+		printf("NOT A MAP\n");
+		exit(EXIT_FAILURE);
+	}
+	ft_memset(&game, 0, sizeof(t_game));
+	map_reader(&game, argv[1]);
+	game.mlx = mlx_init(game.height_map * 40, game.height_map * 40, "Carlos_on_fire", false);
+	if (!game.mlx)
+		ft_error();
+
+	ft_put_image_to_window(&game);
 	
-	mlx_delete_texture(texture);
-	/* Do stuff */
-
-	// mlx_image_t* image = mlx_new_image(mlx, 256, 256);
-	if (!image || (mlx_image_to_window(mlx, image, 0, 0) < 0))
-	{
-		mlx_delete_image(mlx, image);
-		mlx_terminate(mlx);
-		ft_error();
-	}
-
-	mlx_key_hook(mlx, key_hook, mlx);	
+	mlx_key_hook(game.mlx, keys_moves, &game);	
 	// mlx_key_hook(mlx, key_hook, mlx);
 
+	printf("Width : %d, Height : %d\n", game.width_map, game.height_map);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	// mlx_loop_hook(game.mlx, ft_hook, game.mlx);
+	ft_hook(game.mlx);
+	mlx_loop(game.mlx);
+	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }
-
-void key_hook(mlx_key_data_t keydata, void *param)
-{
-	mlx_t *mlx = (mlx_t *)param;
-
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{	
-		mlx_terminate(mlx);
-		exit(EXIT_SUCCESS);
-	}
-}
-// int	main(int argc, char **argv)
-// {
-// 	int	argv_len;
-// 	int	map_fd;
-
-// 	// argv_len = ft_strlen(argv[1]);
-// 	// if (argc != 2)
-// 	// {
-// 	// 	printf("NOT THE RIGHT AMOUNT OF ARGUMENTS\n");
-// 	// 	exit(EXIT_FAILURE);
-// 	// }
-// 	// if (ft_strncmp(argv[1][argv_len - 4], ".ber", 5) != 0)
-// 	// {
-// 	// 	printf("NOT A MAP\n");
-// 	// 	exit(EXIT_FAILURE);
-// 	// }
-// 	// map_fd = open(argv[1], O_RDONLY);
-// 	// if (map_fd < 0)
-// 	// {
-// 	// 	printf("COULD NOT OPEN FILE.\n");
-// 	// 	exit(EXIT_FAILURE);
-// 	// }
-	
-// }
-
