@@ -8,11 +8,10 @@ void map_reader(t_game *game, char *map)
 
 	if (game->map_fd < 0)
 	{
-		printf("Couldn't load the map!\n");
+		ft_printf("Couldn't load the map!\n");
 		exit(EXIT_FAILURE);
 	}
 	int y = 0;
-	// printf("MAP:\n");
 	game->map = ft_calloc(200, sizeof(char *));
 	while (1)
 	{
@@ -28,27 +27,6 @@ void map_reader(t_game *game, char *map)
 	game->width_map = map_width(game->map[1]);
 }
 
-// int add_map_line(t_game *game, char *next_line)
-// {
-// 	char **temp_map;
-// 	int i;
-
-// 	if (next_line == NULL)
-// 		return (0);
-// 	game->height_map++;
-// 	temp_map = (char **)malloc((game->height_map + 1) * sizeof(char *));
-// 	temp_map[game->height_map] = NULL;
-// 	i = 0;
-// 	while (i < game->height_map - 1)
-// 	{
-// 		temp_map[i] = game->map[i];
-// 		i++;
-// 	}
-// 	temp_map[i] = next_line;
-// 	game->map = temp_map;
-// 	return (1);
-// }
-
 int map_width(char *first_line)
 {
 	int i;
@@ -57,4 +35,17 @@ int map_width(char *first_line)
 	while (first_line[i] != '\n')
 		i++;
 	return (i);
+}
+
+void free_map(t_game *game)
+{
+	int i;
+
+	i = 0;
+	while (i < game->height_map)
+	{
+		free(game->map[i]);
+		i++;
+	}
+	free(game->map);
 }

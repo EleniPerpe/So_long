@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphics.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/23 14:16:50 by eperperi          #+#    #+#             */
+/*   Updated: 2024/05/23 16:29:18 by eperperi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 	#include "../MLX42.h"
 	#include "../so_long.h"
 
@@ -35,56 +47,43 @@
 		ft_load_image(game, &game->wall, "wall.png");
 	}
 
-	void print_map(t_game *game) {
-		for(int i = 0; i < game->height_map; i++) {
-			for (int j = 0; j < game->width_map; j++) {
-				printf("%c",game->map[i][j]);
-			}
-		}
-	}
-
 	void ft_put_image_to_window(t_game *game)
 	{
 		int i;
 		int j;
-		int x;
-		int y;
 
 		load_images(game);
 		i = 0;
 		game->colletible_count = 0;
-		// mlx_resize_image(game->player, 60, 60);
 
 		while (i < game->height_map)
 		{
 			j = 0;
 			while (j < game->width_map)
 			{
-				x = j * TILE_SIZE;
-				y = i * TILE_SIZE;
 				if (game->map[i][j] == '1') {
-					mlx_image_to_window(game->mlx, game->wall, x, y);
+					mlx_image_to_window(game->mlx, game->wall, j * TILE_SIZE, i * TILE_SIZE);
 				}
 				else if (game->map[i][j] == '0')
-					mlx_image_to_window(game->mlx, game->floor, x, y);
+					mlx_image_to_window(game->mlx, game->floor, j * TILE_SIZE, i * TILE_SIZE);
 				else if (game->map[i][j] == 'P')
 					move_player(game, i, j);
 				else if (game->map[i][j] == 'C')
 				{
 					game->colletible_count++;
-					mlx_image_to_window(game->mlx, game->floor, x, y);
-					mlx_image_to_window(game->mlx, game->collectible, x, y);
+					mlx_image_to_window(game->mlx, game->floor, j * TILE_SIZE, i * TILE_SIZE);
+					mlx_image_to_window(game->mlx, game->collectible, j * TILE_SIZE, i * TILE_SIZE);
 				}
 				else if (game->map[i][j] == 'E')
 				{
-					mlx_image_to_window(game->mlx, game->floor, x, y);
-					mlx_image_to_window(game->mlx, game->exit, x, y);
+					mlx_image_to_window(game->mlx, game->floor, j * TILE_SIZE, i * TILE_SIZE);
+					mlx_image_to_window(game->mlx, game->exit, j * TILE_SIZE, i * TILE_SIZE);
 				}
 				j++;
 			}
 			i++;
 		}
-		printf("Collectibles : %d\n", game->colletible_count);
+		ft_printf("Collectibles : %d\n", game->colletible_count);
 	}
 
 void move_player(t_game *game, int height, int width)

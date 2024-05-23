@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/23 12:48:32 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/23 17:39:02 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int up_and_down_movement(t_game *game, int button)
 	int exit_temp;
 
 	temp = game->y;
-	// printf("up/donw: %c\n", game->map[temp][game->x]);
 	if (button == MLX_KEY_W || button == MLX_KEY_UP)
 		temp--;
 	else if (button == MLX_KEY_S || button == MLX_KEY_DOWN)
@@ -63,7 +62,7 @@ int up_and_down_movement(t_game *game, int button)
 		game->y = temp;
 		game->map[game->y][game->x] = 'P';
 		game->steps++;
-		printf("Steps: %d\n", game->steps);
+		ft_printf("Steps: %d\n", game->steps);
 		return (1);
 	}
 	return (0);
@@ -75,7 +74,6 @@ int left_and_right_movement(t_game *game, int button)
 	int exit_temp;
 
 	temp = game->x;
-	// printf("left/right: %c\n", game->map[temp][game->x]);
 	if (button == MLX_KEY_A || button == MLX_KEY_LEFT)
 		temp--;
 	else if (button == MLX_KEY_D || button == MLX_KEY_RIGHT)
@@ -89,7 +87,7 @@ int left_and_right_movement(t_game *game, int button)
 		game->x = temp;
 		game->map[game->y][game->x] = 'P';
 		game->steps++;
-		printf("Steps: %d\n", game->steps);
+		ft_printf("Steps: %d\n", game->steps);
 		return (1);
 	}
 	return (0);
@@ -98,8 +96,9 @@ int check_exit_game(t_game *game, int y, int x)
 {
 	if (game->map[y][x] == 'E' && game->colletible_count == 0)
 		{
-			printf("Congratulations Carlos!");
+			ft_printf("Congratulations Carlos!");
 			mlx_terminate(game->mlx);
+			free_map(game);
 			exit(EXIT_SUCCESS);
 		}
 	else if (game->map[y][x] == 'E' && game->colletible_count != 0)

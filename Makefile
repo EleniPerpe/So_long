@@ -6,7 +6,7 @@
 #    By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 15:13:49 by eperperi          #+#    #+#              #
-#    Updated: 2024/05/21 13:48:53 by eperperi         ###   ########.fr        #
+#    Updated: 2024/05/23 19:05:18 by eperperi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,21 +25,28 @@ WHITE	=	\033[0m
 SRC_DIR	=	./srcs/
 OBJ_DIR	=	./objs/
 GNL_DIR =	./Get_next_line/
+FT_PRINTF_DIR = ./ft_printf/
 
 SRC		 =	$(SRC_DIR)so_long.c \
 			$(SRC_DIR)graphics.c \
 			$(SRC_DIR)maping.c \
-			$(SRC_DIR)moving.c
+			$(SRC_DIR)moving.c \
+			$(SRC_DIR)errors_control.c
 GNL_SRC  =	$(GNL_DIR)get_next_line.c $(GNL_DIR)get_next_line_utils.c 
+FT_PRINTF_SRC = $(FT_PRINTF_DIR)ft_printf_main.c \
+				$(FT_PRINTF_DIR)mini_hex_lib.c \
+				$(FT_PRINTF_DIR)mini_libft.c \
+				$(FT_PRINTF_DIR)mini_p_lib.c
 			
 OBJ		 =	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 GNL_OBJ	 =	$(GNL_SRC:$(GNL_DIR)%.c=$(OBJ_DIR)%.o)
+FT_PRINTF_OBJ	 =	$(FT_PRINTF_SRC:$(FT_PRINTF_DIR)%.c=$(OBJ_DIR)%.o)
 LIB		 =	Libft/libft.a
 MLX42	 =	libmlx42.a
 
-$(NAME): $(MLX42) $(OBJ) $(GNL_OBJ) $(LIB)
+$(NAME): $(MLX42) $(OBJ) $(GNL_OBJ) $(FT_PRINTF_OBJ) $(LIB)
 		@$(MAKE) -C Libft
-		@$(CC) $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(MLX42) $(OBJ) $(LIB) $(GNL_OBJ)
+		@$(CC) $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(MLX42) $(OBJ) $(LIB) $(GNL_OBJ) $(FT_PRINTF_OBJ)
 		@echo "$(GREEN)So_long compiled!$(WHITE)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -47,6 +54,10 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	
 $(OBJ_DIR)%.o: $(GNL_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(FT_PRINTF_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

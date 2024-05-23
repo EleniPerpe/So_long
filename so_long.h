@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:58:47 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/23 12:16:10 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:49:57 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include "Libft/libft.h"
 # include "Get_next_line/get_next_line.h"
+# include "ft_printf/ft_printf.h"
 # include "MLX42.h"
 
 typedef struct s_game
@@ -50,6 +51,10 @@ void	ft_error(void);
 void 	map_reader(t_game *game, char *map);
 int 	add_map_line(t_game *game, char *next_line);
 int 	map_width(char *first_line);
-void keys_moves(mlx_key_data_t keydata, void *param);
+void	keys_moves(mlx_key_data_t keydata, void *param);
+void	check_map_walls(t_game *game, int i, int j);
+void	free_map(t_game *game);
+void	check_map_square(t_game *game);
+void check_valid_assets(t_game *game);
 
 #endif
