@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:31:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/21 13:47:51 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/23 12:34:26 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,25 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	ft_memset(&game, 0, sizeof(t_game));
+	game.steps = 0;
 	map_reader(&game, argv[1]);
+	printf("Width : %d, Height : %d\n", game.width_map, game.height_map);
 	game.mlx = mlx_init(game.height_map * 40, game.height_map * 40, "Carlos_on_fire", false);
 	if (!game.mlx)
 		ft_error();
 
 	ft_put_image_to_window(&game);
+	printf("asd!\n");
 	
 	mlx_key_hook(game.mlx, keys_moves, &game);	
 	// mlx_key_hook(mlx, key_hook, mlx);
 
-	printf("Width : %d, Height : %d\n", game.width_map, game.height_map);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	// mlx_loop_hook(game.mlx, ft_hook, game.mlx);
 	ft_hook(game.mlx);
 	mlx_loop(game.mlx);
+	// free map
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

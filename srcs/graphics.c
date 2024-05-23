@@ -35,6 +35,14 @@
 		ft_load_image(game, &game->wall, "wall.png");
 	}
 
+	void print_map(t_game *game) {
+		for(int i = 0; i < game->height_map; i++) {
+			for (int j = 0; j < game->width_map; j++) {
+				printf("%c",game->map[i][j]);
+			}
+		}
+	}
+
 	void ft_put_image_to_window(t_game *game)
 	{
 		int i;
@@ -44,9 +52,9 @@
 
 		load_images(game);
 		i = 0;
-		j = 0;
-
+		game->colletible_count = 0;
 		// mlx_resize_image(game->player, 60, 60);
+
 		while (i < game->height_map)
 		{
 			j = 0;
@@ -54,8 +62,9 @@
 			{
 				x = j * TILE_SIZE;
 				y = i * TILE_SIZE;
-				if (game->map[i][j] == '1')
+				if (game->map[i][j] == '1') {
 					mlx_image_to_window(game->mlx, game->wall, x, y);
+				}
 				else if (game->map[i][j] == '0')
 					mlx_image_to_window(game->mlx, game->floor, x, y);
 				else if (game->map[i][j] == 'P')
@@ -75,6 +84,7 @@
 			}
 			i++;
 		}
+		printf("Collectibles : %d\n", game->colletible_count);
 	}
 
 void move_player(t_game *game, int height, int width)
