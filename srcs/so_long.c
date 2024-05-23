@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:31:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/21 19:15:51 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:47:51 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <unistd.h>
 #include "../MLX42.h"
 #include "../so_long.h"
-// #define WIDTH 800
-// #define HEIGHT 800
+#define WIDTH 800
+#define HEIGHT 800
 
 void key_hook(mlx_key_data_t keycode, void *param);
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 	mlx_key_hook(game.mlx, keys_moves, &game);	
 	// mlx_key_hook(mlx, key_hook, mlx);
 
-	// printf("Width : %d, Height : %d\n", game.width_map, game.height_map);
+	printf("Width : %d, Height : %d\n", game.width_map, game.height_map);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	// mlx_loop_hook(game.mlx, ft_hook, game.mlx);
