@@ -6,36 +6,37 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 15:38:49 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:11:23 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../MLX42.h"
 #include "../so_long.h"
 
-int left_and_right_movement(t_game *game, int button);
-int up_and_down_movement(t_game *game, int button);
-int check_exit_game(t_game *game, int y, int x);
+int	left_and_right_movement(t_game *game, int button);
+int	up_and_down_movement(t_game *game, int button);
+int	check_exit_game(t_game *game, int y, int x);
 
-void keys_moves(mlx_key_data_t keydata, void *param)
+void	keys_moves(mlx_key_data_t keydata, void *param)
 {
-	int move;
-	 t_game *game;
+	int		move;
+	t_game	*game;
 
-	 game = (t_game *)param;
-
+	game = (t_game *)param;
 	move = 0;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{	
+	{
 		mlx_terminate(game->mlx);
 		exit(EXIT_SUCCESS);
 	}
-	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
+	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP
+			|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
 		&& keydata.action == MLX_PRESS)
 	{
 		move = up_and_down_movement(game, keydata.key);
 	}
-	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
+	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT
+			|| keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
 		&& keydata.action == MLX_PRESS)
 	{
 		move = left_and_right_movement(game, keydata.key);
@@ -43,10 +44,11 @@ void keys_moves(mlx_key_data_t keydata, void *param)
 	if (move)
 		ft_put_image_to_window(game);
 }
-int up_and_down_movement(t_game *game, int button)
+
+int	up_and_down_movement(t_game *game, int button)
 {
-	int temp;
-	int exit_temp;
+	int	temp;
+	int	exit_temp;
 
 	if (game->map == NULL)
 		exit(EXIT_FAILURE);
@@ -70,10 +72,10 @@ int up_and_down_movement(t_game *game, int button)
 	return (0);
 }
 
-int left_and_right_movement(t_game *game, int button)
+int	left_and_right_movement(t_game *game, int button)
 {
-	int temp;
-	int exit_temp;
+	int	temp;
+	int	exit_temp;
 
 	if (game->map == NULL)
 		exit(EXIT_FAILURE);
@@ -96,16 +98,17 @@ int left_and_right_movement(t_game *game, int button)
 	}
 	return (0);
 }
-int check_exit_game(t_game *game, int y, int x)
+
+int	check_exit_game(t_game *game, int y, int x)
 {
-	if (game->map[y][x] == 'E' && game->colletible_count == 0)
-		{
-			ft_printf("Congratulations Carlos!");
-			mlx_terminate(game->mlx);
-			free_map(game);
-			exit(EXIT_SUCCESS);
-		}
-	else if (game->map[y][x] == 'E' && game->colletible_count != 0)
+	if (game->map[y][x] == 'E' && game->c_c == 0)
+	{
+		ft_printf("Congratulations Carlos!");
+		mlx_terminate(game->mlx);
+		free_map(game);
+		exit(EXIT_SUCCESS);
+	}
+	else if (game->map[y][x] == 'E' && game->c_c != 0)
 	{
 		return (0);
 	}

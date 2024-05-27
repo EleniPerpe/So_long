@@ -6,13 +6,12 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:20:36 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 15:30:01 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:33:13 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_error_exit(const char *msg, int code);
 void	ft_flood_fill(char **map, t_game *game, int x, int y, int *c, int *exit);
 
 void	ft_check_player_paths(t_game *game)
@@ -25,48 +24,32 @@ void	ft_check_player_paths(t_game *game)
 
 	collect = 0;
 	exit = 0;
-	malloc(game->height_map * sizeof(char *));
+	tmp_map = malloc(game->height_map * sizeof(char *));
 	if (tmp_map == NULL)
-	{
-		ft_error_exit("Memory allocation failed", 1);
-		free_map(game);
-	}
-	i = 0;
-	j = 0;
-	while (i < game->height_map)
+		ft_error_exit(game, "Memory allocation failed");
+	i = -1;
+	j = -1;
+	while (++i < game->height_map)
 	{
 		tmp_map[i] = strdup(game->map[i]);
 		if (tmp_map[i] == NULL)
 		{
-			while (j < i)
-			{
+			while (++j < i)
 				free(tmp_map[i]);
-				j++;
-			}
 			free(tmp_map);
 		}
-		i++;
 	}
 	ft_flood_fill(tmp_map, game, game->flood_x, game->flood_y, &collect, &exit);
-	i = 0;
-	while (i < game->height_map)
-	{
+	i = -1;
+	while (++i < game->height_map)
 		free(tmp_map[i]);
-		i++;
-	}
 	free(tmp_map);
-	if (collect != game->colletible_count && exit == 0)
-	{
-		ft_error_exit("exit and collectible(s) not reachable", 0);
-	}
-	if (collect != game->colletible_count)
-	{
-		ft_error_exit("collectible(s) not reachable", 0);
-	}
+	if (collect != game->c_c && exit == 0)
+		ft_error_exit(game, "Exit and collectible(s) are not reachable!");
+	if (collect != game->c_c)
+		ft_error_exit(game, "Collectible(s) are not reachable!");
 	if (exit == 0)
-	{
-		ft_error_exit("exit is not reachable", 0);
-	}
+		ft_error_exit(game, "Exit is not reachable!");
 }
 
 void	ft_flood_fill(char **map, t_game *game, int x, int y, int *c, int *exit)
@@ -95,8 +78,11 @@ void	ft_flood_fill(char **map, t_game *game, int x, int y, int *c, int *exit)
 	ft_flood_fill(map, game, x, y + 1, c, exit);
 }
 
-void	ft_error_exit(const char *msg, int code)
+void	ft_error_exit(t_game *game, const char *msg)
 {
 	fprintf(stderr, "%s\n", msg);
-	exit(code);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
+	free_map(game);
+	exit(EXIT_FAILURE);
 }

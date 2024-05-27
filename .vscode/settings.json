@@ -5,6 +5,7 @@
 		"libft.h": "c",
 		"stddef.h": "c",
 		"stdlib.h": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"mlx42.h": "c"
 	}
 }

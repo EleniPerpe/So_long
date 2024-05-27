@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:50 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 15:33:53 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:11:59 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,8 @@
 #define TILE_SIZE 40
 
 void	move_player(t_game *game, int height, int width);
-
-void	ft_load_image(t_game *game, mlx_image_t **image, const char *file_path)
-{
-	mlx_texture_t	*temp_texture;
-
-	temp_texture = mlx_load_png(file_path);
-	if (temp_texture == NULL)
-	{
-		mlx_terminate(game->mlx);
-		ft_error();
-	}
-	*image = mlx_texture_to_image(game->mlx, temp_texture);
-	if (game->player == NULL)
-	{
-		mlx_terminate(game->mlx);
-		ft_error();
-	}
-	mlx_delete_texture(temp_texture);
-}
+void	put_collectible(t_game *game, int height, int width);
+void	put_exit(t_game *game, int height, int width);
 
 void	load_images(t_game *game)
 {
@@ -50,37 +33,28 @@ void	ft_put_image_to_window(t_game *game)
 	int	i;
 	int	j;
 
-	i = 0;
-	game->colletible_count = 0;
-	while (i < game->height_map)
+	i = -1;
+	game->c_c = 0;
+	while (++i < game->height_map)
 	{
-		j = 0;
-		while (j < game->width_map)
+		j = -1;
+		while (++j < game->width_map)
 		{
 			if (game->map[i][j] == '1')
-			{
-				mlx_image_to_window(game->mlx, game->wall, j * TILE_SIZE, i * TILE_SIZE);
-			}
+				mlx_image_to_window(game->mlx, game->wall,
+					j * TILE_SIZE, i * TILE_SIZE);
 			else if (game->map[i][j] == '0')
-				mlx_image_to_window(game->mlx, game->floor, j * TILE_SIZE, i * TILE_SIZE);
+				mlx_image_to_window(game->mlx, game->floor,
+					j * TILE_SIZE, i * TILE_SIZE);
 			else if (game->map[i][j] == 'P')
 				move_player(game, i, j);
 			else if (game->map[i][j] == 'C')
-			{
-				game->colletible_count++;
-				mlx_image_to_window(game->mlx, game->floor, j * TILE_SIZE, i * TILE_SIZE);
-				mlx_image_to_window(game->mlx, game->collectible, j * TILE_SIZE, i * TILE_SIZE);
-			}
+				put_collectible(game, i, j);
 			else if (game->map[i][j] == 'E')
-			{
-				mlx_image_to_window(game->mlx, game->floor, j * TILE_SIZE, i * TILE_SIZE);
-				mlx_image_to_window(game->mlx, game->exit, j * TILE_SIZE, i * TILE_SIZE);
-			}
-			j++;
+				put_exit(game, i, j);
 		}
-		i++;
 	}
-	ft_printf("Collectibles : %d\n", game->colletible_count);
+	ft_printf("Collectibles : %d\n", game->c_c);
 }
 
 void	move_player(t_game *game, int height, int width)
@@ -91,4 +65,21 @@ void	move_player(t_game *game, int height, int width)
 		height * TILE_SIZE);
 	game->y = height;
 	game->x = width;
+}
+
+void	put_collectible(t_game *game, int height, int width)
+{
+	game->c_c++;
+	mlx_image_to_window(game->mlx, game->floor, width * TILE_SIZE,
+		height * TILE_SIZE);
+	mlx_image_to_window(game->mlx, game->collectible, width * TILE_SIZE,
+		height * TILE_SIZE);
+}
+
+void	put_exit(t_game *game, int height, int width)
+{
+	mlx_image_to_window(game->mlx, game->floor, width * TILE_SIZE,
+		height * TILE_SIZE);
+	mlx_image_to_window(game->mlx, game->exit, width * TILE_SIZE,
+		height * TILE_SIZE);
 }

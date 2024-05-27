@@ -6,12 +6,16 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 15:21:35 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:32:26 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 #include "../MLX42.h"
+
+void	check_map_square(t_game *game);
+void	check_valid_assets(t_game *game);
+void	find_player_position(t_game *game);
 
 void	check_map_walls(t_game *game, int i, int j)
 {
@@ -21,26 +25,13 @@ void	check_map_walls(t_game *game, int i, int j)
 		while (j < game->width_map)
 		{
 			if ((i == 0 || i == game->height_map - 1) && game->map[i][j] != '1')
-			{
-				ft_printf("No walls! 2\n");
-				if (game->mlx)
-					mlx_terminate(game->mlx);
-				free_map(game);
-				exit(EXIT_FAILURE);
-			}
+				ft_error_exit(game, "There are no walls around!");
 			if ((j == 0 || j == game->width_map - 1) && game->map[i][j] != '1')
-			{
-				if (game->mlx)
-					mlx_terminate(game->mlx);
-				ft_printf("No walls! 1\n");
-				free_map(game);
-				exit(EXIT_FAILURE);
-			}
+				ft_error_exit(game, "There are no walls around!");
 			j++;
 		}
 		i++;
 	}
-	printf("hey\n");
 	check_map_square(game);
 	check_valid_assets(game);
 	find_player_position(game);
@@ -77,27 +68,23 @@ void	check_valid_assets(t_game *game)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < game->height_map)
+	i = -1;
+	while (++i < game->height_map)
 	{
-		j = 0;
-		while (j < game->width_map)
+		j = -1;
+		while (++j < game->width_map)
 		{
 			if (game->map[i][j] == 'E')
-				game->exit_count++;
+				game->e_c++;
 			else if (game->map[i][j] == 'P')
-				game->player_count++;
+				game->p_c++;
 			else if (game->map[i][j] == 'C')
-				game->colletible_count++;
-			j++;
+				game->c_c++;
 		}
-		i++;
-		// ft_printf("P = %d, C = %d, E = %d\n", game->player_count, game->colletible_count, game->exit_count);
 	}
-	if (game->exit_count != 1 || game->player_count != 1
-		|| game->colletible_count < 1)
+	if (game->e_c != 1 || game->p_c != 1 || game->c_c < 1)
 	{
-		ft_printf("Not the right amount of assets so the game to start!\n");
+		ft_printf("Not the correct amount of assets so the game to start!\n");
 		if (game->mlx)
 			mlx_terminate(game->mlx);
 		free_map(game);
@@ -125,5 +112,4 @@ void	find_player_position(t_game *game)
 		}
 		i++;
 	}
-	// ft_printf("Position heigth : %d, Position width : %d\n", game->flood_x, game->flood_y);
 }
