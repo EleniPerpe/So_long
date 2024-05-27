@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 15:15:01 by eperperi          #+#    #+#             */
-/*   Updated: 2024/03/10 15:28:12 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:23:15 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*ft_strdup(const char *s1)
 {
+	size_t	len;
 	char	*ptr;
-	size_t	n;
 
-	n = ft_strlen(s1) + 1;
-	ptr = (char *) malloc(n * sizeof(char));
+	len = ft_strlen(s1) + 1;
+	ptr = (char *)malloc(len * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
-	ft_strlcpy(ptr, s1, n);
+	ft_memcpy(ptr, s1, len);
 	return (ptr);
 }

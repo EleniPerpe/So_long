@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:50 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 10:20:29 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:36:56 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@
 		int i;
 		int j;
 
-		load_images(game);
 		i = 0;
 		game->colletible_count = 0;
 

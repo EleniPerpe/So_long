@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/23 17:39:02 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:04:45 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int up_and_down_movement(t_game *game, int button)
 	int temp;
 	int exit_temp;
 
+	if (game->map == NULL)
+		exit(EXIT_FAILURE);
 	temp = game->y;
 	if (button == MLX_KEY_W || button == MLX_KEY_UP)
 		temp--;
@@ -73,6 +75,8 @@ int left_and_right_movement(t_game *game, int button)
 	int temp;
 	int exit_temp;
 
+	if (game->map == NULL)
+		exit(EXIT_FAILURE);
 	temp = game->x;
 	if (button == MLX_KEY_A || button == MLX_KEY_LEFT)
 		temp--;

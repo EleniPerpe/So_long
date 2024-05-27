@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:58:47 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/23 18:49:57 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:36:09 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_game
 	int steps;
 	int x;
 	int y;
+	int flood_x;
+	int flood_y;
 	
 	char **map;
 	
@@ -56,5 +58,7 @@ void	check_map_walls(t_game *game, int i, int j);
 void	free_map(t_game *game);
 void	check_map_square(t_game *game);
 void check_valid_assets(t_game *game);
+void find_player_position(t_game *game);
+void	load_images(t_game *game);
 
 #endif

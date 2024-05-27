@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:31:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/23 18:32:20 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:56:13 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ int	main(int argc, char **argv)
 	ft_memset(&game, 0, sizeof(t_game));
 	game.steps = 0;
 	map_reader(&game, argv[1]);
+	if (game.map ==  NULL)
+		printf("empty\n");
 	check_map_walls(&game, 0, 0);
 	game.mlx = mlx_init(game.width_map * 40, game.height_map * 40, "Carlos_on_fire", true);
 	if (!game.mlx)
 		ft_error();
-
+	load_images(&game);
 	ft_put_image_to_window(&game);
 	mlx_key_hook(game.mlx, keys_moves, &game);
 	ft_hook(game.mlx);
