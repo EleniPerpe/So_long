@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:34:46 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 20:55:04 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:11:18 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	map_reader(t_game *game, char *map)
 	game->map_fd = open(map, O_RDONLY);
 	if (game->map_fd < 0)
 	{
-		ft_printf("Couldn't load the map!\n");
+		ft_printf("Error\nCouldn't load the map!\n");
 		exit(EXIT_FAILURE);
 	}
 	y = 0;

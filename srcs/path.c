@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:20:36 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 20:51:58 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:12:11 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_setup_tmp_map(t_game *game, char ***tmp_map)
 
 	*tmp_map = malloc(game->height_map * sizeof(char *));
 	if (*tmp_map == NULL)
-		ft_error_exit(game, "Memory allocation failed");
+		ft_error_exit(game, "Error\nMemory allocation failed");
 	i = -1;
 	while (++i < game->height_map)
 	{
@@ -47,7 +47,7 @@ void	ft_setup_tmp_map(t_game *game, char ***tmp_map)
 			while (++j < i)
 				free((*tmp_map)[j]);
 			free(*tmp_map);
-			ft_error_exit(game, "Memory allocation failed");
+			ft_error_exit(game, "Error\nMemory allocation failed");
 		}
 	}
 }
@@ -62,11 +62,12 @@ void	ft_check_paths_and_cleanup(t_game *game, t_flood_fill_data *data,
 		free(tmp_map[i]);
 	free(tmp_map);
 	if (data->collectibles != game->c_c && data->exit == 0)
-		ft_error_exit(game, "Exit and collectible(s) are not reachable!");
+		ft_error_exit(game,
+			"Error\nExit and collectible(s) are not reachable!");
 	if (data->collectibles != game->c_c)
-		ft_error_exit(game, "Collectible(s) are not reachable!");
+		ft_error_exit(game, "Error\nCollectible(s) are not reachable!");
 	if (data->exit == 0)
-		ft_error_exit(game, "Exit is not reachable!");
+		ft_error_exit(game, "Error\nExit is not reachable!");
 }
 
 void	ft_flood_fill(char **map, int x, int y, t_flood_fill_data *data)

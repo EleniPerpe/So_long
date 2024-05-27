@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 20:32:54 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:11:07 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	check_map_walls(t_game *game, int i, int j, t_flood_fill_data *data)
 		while (j < game->width_map)
 		{
 			if ((i == 0 || i == game->height_map - 1) && game->map[i][j] != '1')
-				ft_error_exit(game, "There are no walls around!");
+				ft_error_exit(game, "Error\nThere are no walls around!");
 			if ((j == 0 || j == game->width_map - 1) && game->map[i][j] != '1')
-				ft_error_exit(game, "There are no walls around!");
+				ft_error_exit(game, "Error\nThere are no walls around!");
 			j++;
 		}
 		i++;
@@ -53,7 +53,7 @@ void	check_map_square(t_game *game)
 		}
 		if (j != game->width_map)
 		{
-			ft_printf("No square!\n");
+			ft_printf("Error\nThe map is no rectangular!\n");
 			if (game->mlx)
 				mlx_terminate(game->mlx);
 			free_map(game);
@@ -84,7 +84,7 @@ void	check_valid_assets(t_game *game)
 	}
 	if (game->e_c != 1 || game->p_c != 1 || game->c_c < 1)
 	{
-		ft_printf("Not the correct amount of assets so the game to start!\n");
+		ft_printf("Error\nNot the correct amount of assets!\n");
 		if (game->mlx)
 			mlx_terminate(game->mlx);
 		free_map(game);
