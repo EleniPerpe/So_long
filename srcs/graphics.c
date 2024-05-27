@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:50 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/23 16:29:18 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:20:29 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@
 
 	void load_images(t_game *game)
 	{
-		ft_load_image(game, &game->player, "player.png");
-		ft_load_image(game, &game->collectible, "collect.png");
-		ft_load_image(game, &game->exit, "exit.png");
-		ft_load_image(game, &game->floor, "floor.png");
-		ft_load_image(game, &game->wall, "wall.png");
+		ft_load_image(game, &game->player, "images/player.png");
+		ft_load_image(game, &game->collectible, "images/collect.png");
+		ft_load_image(game, &game->exit, "images/exit.png");
+		ft_load_image(game, &game->floor, "images/floor.png");
+		ft_load_image(game, &game->wall, "images/wall.png");
 	}
 
 	void ft_put_image_to_window(t_game *game)
