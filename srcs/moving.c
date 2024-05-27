@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 20:57:16 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:01:15 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	up_and_down_movement(t_game *game, int button)
 		game->y = temp;
 		game->map[game->y][game->x] = 'P';
 		game->steps++;
-		ft_printf("Carlo's Steps: %d\n", game->steps);
+		ft_printf("Carlo's Steps   : %d\n", game->steps);
 		return (1);
 	}
 	return (0);
@@ -93,7 +93,7 @@ int	left_and_right_movement(t_game *game, int button)
 		game->x = temp;
 		game->map[game->y][game->x] = 'P';
 		game->steps++;
-		ft_printf("Steps: %d\n", game->steps);
+		ft_printf("Carlo's Steps   : %d\n", game->steps);
 		return (1);
 	}
 	return (0);
@@ -103,7 +103,7 @@ int	check_exit_game(t_game *game, int y, int x)
 {
 	if (game->map[y][x] == 'E' && game->c_c == 0)
 	{
-		ft_printf("Congratulations Carlos!");
+		ft_printf("Congratulations Carlos!\n");
 		mlx_terminate(game->mlx);
 		free_map(game);
 		exit(EXIT_SUCCESS);

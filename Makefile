@@ -6,7 +6,7 @@
 #    By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 15:13:49 by eperperi          #+#    #+#              #
-#    Updated: 2024/05/27 14:28:58 by eperperi         ###   ########.fr        #
+#    Updated: 2024/05/27 20:58:52 by eperperi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC		 =	$(SRC_DIR)so_long.c \
 			$(SRC_DIR)maping.c \
 			$(SRC_DIR)moving.c \
 			$(SRC_DIR)errors_control.c \
-			$(SRC_DIR)path.c 
+			$(SRC_DIR)path.c \
+			$(SRC_DIR)fastest_path.c 
 GNL_SRC  =	$(GNL_DIR)get_next_line.c $(GNL_DIR)get_next_line_utils.c 
 FT_PRINTF_SRC = $(FT_PRINTF_DIR)ft_printf_main.c \
 				$(FT_PRINTF_DIR)mini_hex_lib.c \
