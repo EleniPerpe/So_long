@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 19:11:23 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:57:16 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	up_and_down_movement(t_game *game, int button)
 		game->y = temp;
 		game->map[game->y][game->x] = 'P';
 		game->steps++;
-		ft_printf("Steps: %d\n", game->steps);
+		ft_printf("Carlo's Steps: %d\n", game->steps);
 		return (1);
 	}
 	return (0);

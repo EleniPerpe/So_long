@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:31:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 19:21:11 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:42:16 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ void	ft_error(void)
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_game				game;
+	t_flood_fill_data	data;
 
 	arg_check(argc, argv[1]);
 	ft_memset(&game, 0, sizeof(t_game));
+	ft_memset(&data, 0, sizeof(t_flood_fill_data));
 	game.steps = 0;
 	map_reader(&game, argv[1]);
 	if (game.map == NULL)
 		printf("empty\n");
-	check_map_walls(&game, 0, 0);
+	check_map_walls(&game, 0, 0, &data);
 	game.mlx = mlx_init(game.width_map * 40, game.height_map * 40,
 			"Carlos_on_fire", true);
 	if (!game.mlx)

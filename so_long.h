@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:58:47 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 19:30:12 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:33:06 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,22 @@ typedef struct s_game
 	mlx_t		*mlx;
 }	t_game;
 
+typedef struct s_flood_fill_data {
+	t_game	*game;
+	int		collectibles;
+	int		exit;
+}	t_flood_fill_data;
+
 void	ft_put_image_to_window(t_game *game);
 void	ft_load_image(t_game *game, mlx_image_t **image, const char *file_path);
 void	ft_error(void);
 void	map_reader(t_game *game, char *map);
 int		map_width(char *first_line);
 void	keys_moves(mlx_key_data_t keydata, void *param);
-void	check_map_walls(t_game *game, int i, int j);
+void	check_map_walls(t_game *game, int i, int j, t_flood_fill_data *data);
 void	free_map(t_game *game);
 void	load_images(t_game *game);
-void	ft_check_player_paths(t_game *game);
+void	ft_check_player_paths(t_game *game, t_flood_fill_data *data);
 void	ft_error_exit(t_game *game, const char *msg);
 
 #endif

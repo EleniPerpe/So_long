@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:50 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 19:11:59 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:56:54 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_put_image_to_window(t_game *game)
 				put_exit(game, i, j);
 		}
 	}
-	ft_printf("Collectibles : %d\n", game->c_c);
+	ft_printf("Cigarettes left : %d\n", game->c_c);
 }
 
 void	move_player(t_game *game, int height, int width)

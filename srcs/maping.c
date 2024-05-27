@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:34:46 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 19:21:28 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:55:04 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void	map_reader(t_game *game, char *map)
 	}
 	y = 0;
 	game->map = ft_calloc(200, sizeof(char *));
-	while ((reader = get_next_line(game->map_fd)) != NULL)
+	reader = get_next_line(game->map_fd);
+	while (reader != NULL)
 	{
 		game->map[y] = ft_strdup(reader);
+		free(reader);
+		reader = get_next_line(game->map_fd);
 		y++;
 		game->height_map++;
 	}
 	close(game->map_fd);
 	game->width_map = map_width(game->map[0]);
-	printf("height map: %d\n", game->height_map);
-	printf("width map: %d\n", game->width_map);
 }
 
 int	map_width(char *first_line)

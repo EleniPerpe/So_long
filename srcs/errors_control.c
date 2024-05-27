@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 19:32:26 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:32:54 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_map_square(t_game *game);
 void	check_valid_assets(t_game *game);
 void	find_player_position(t_game *game);
 
-void	check_map_walls(t_game *game, int i, int j)
+void	check_map_walls(t_game *game, int i, int j, t_flood_fill_data *data)
 {
 	while (i < game->height_map)
 	{
@@ -35,7 +35,7 @@ void	check_map_walls(t_game *game, int i, int j)
 	check_map_square(game);
 	check_valid_assets(game);
 	find_player_position(game);
-	ft_check_player_paths(game);
+	ft_check_player_paths(game, data);
 }
 
 void	check_map_square(t_game *game)
