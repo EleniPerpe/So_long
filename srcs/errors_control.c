@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/23 18:03:46 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:13:14 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void check_valid_assets(t_game *game)
 			j++;
 		}
 		i++;
-		// printf("P = %d, C = %d, E = %d\n", game->player_count, game->colletible_count, game->exit_count);
+		ft_printf("P = %d, C = %d, E = %d\n", game->player_count, game->colletible_count, game->exit_count);
 	}
 	if (game->exit_count != 1 || game->player_count != 1 || game->colletible_count < 1)
 	{
