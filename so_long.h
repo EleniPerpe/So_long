@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:58:47 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 13:36:09 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:05:38 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	check_map_square(t_game *game);
 void check_valid_assets(t_game *game);
 void find_player_position(t_game *game);
 void	load_images(t_game *game);
+void ft_check_player_paths(t_game *game);
 
 #endif
