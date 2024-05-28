@@ -6,7 +6,7 @@
 #    By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 15:13:49 by eperperi          #+#    #+#              #
-#    Updated: 2024/05/27 20:58:52 by eperperi         ###   ########.fr        #
+#    Updated: 2024/05/28 11:54:52 by eperperi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	so_long
 
-CC			=	gcc -g -fsanitize=address
+CC			=	gcc #-g -fsanitize=address
 CFLAGS		=	-Wall -Wextra -Werror
 MLXFLAGS	=	-lglfw -L "$(HOME)/.brew/opt/glfw/lib/"
 
@@ -82,7 +82,7 @@ clean:
 		@rm -rf $(OBJ_DIR)
 		@echo "$(CYAN)Object files cleaned!$(WHITE)"
 
-fclean:	
+fclean:	clean
 		@$(MAKE) -C Libft fclean
 		@rm -f $(NAME)
 		@echo "$(CYAN)Executable and object files cleaned!$(WHITE)"
