@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:31:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/28 12:24:57 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:48:20 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		arg_check(int argc, char *arg);
 void	ft_load_image(t_game *game, mlx_image_t **image, const char *file_path);
-
 
 void	ft_error(void)
 {
@@ -30,7 +29,6 @@ int	main(int argc, char **argv)
 	arg_check(argc, argv[1]);
 	ft_memset(&game, 0, sizeof(t_game));
 	ft_memset(&data, 0, sizeof(t_flood_fill_data));
-	game.steps = 0;
 	map_reader(&game, argv[1]);
 	if (game.map == NULL)
 		ft_error();
@@ -38,7 +36,10 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init(game.width_map * 40, game.height_map * 40,
 			"Carlos_on_fire", true);
 	if (!game.mlx)
+	{
+		free_map(&game);
 		ft_error();
+	}
 	load_images(&game);
 	ft_put_image_to_window(&game);
 	mlx_key_hook(game.mlx, keys_moves, &game);
