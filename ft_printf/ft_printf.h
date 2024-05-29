@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 19:55:11 by eperperi          #+#    #+#             */
-/*   Updated: 2024/03/26 12:42:13 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:37:31 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int		ft_printf(const char *input, ...);
 int		p_calc(unsigned long n, int *counter);
 int		check_null_p(unsigned long n);
 int		check_null_hex(unsigned long n, int *counter);
-char	*print_p(char *res, int hex_len);
+void	print_p(char *res, int hex_len, int *counter);
 
 #endif

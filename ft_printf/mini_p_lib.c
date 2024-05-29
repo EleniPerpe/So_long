@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 18:33:44 by eperperi          #+#    #+#             */
-/*   Updated: 2024/03/26 12:42:46 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:38:36 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	p_calc(unsigned long n, int *counter)
 	return (free(res), *counter);
 }
 
-void print_p(char *res, int hex_len, int *counter)
+void	print_p(char *res, int hex_len, int *counter)
 {
 	res[0] = '0';
 	res[1] = 'x';

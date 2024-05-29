@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 15:23:20 by eperperi          #+#    #+#             */
-/*   Updated: 2024/03/26 11:51:27 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:38:21 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	print_num(int n, int *counter)
 {
 	char	s;
+
 	if (n == -2147483648)
 	{
 		*counter = putstr("-2147483648", counter);
