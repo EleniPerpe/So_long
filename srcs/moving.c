@@ -6,11 +6,10 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:39:27 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 21:01:15 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:30:42 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../MLX42.h"
 #include "../so_long.h"
 
 int	left_and_right_movement(t_game *game, int button);
@@ -31,13 +30,13 @@ void	keys_moves(mlx_key_data_t keydata, void *param)
 	}
 	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP
 			|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
-		&& keydata.action == MLX_PRESS)
+		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 	{
 		move = up_and_down_movement(game, keydata.key);
 	}
 	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT
 			|| keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
-		&& keydata.action == MLX_PRESS)
+		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 	{
 		move = left_and_right_movement(game, keydata.key);
 	}

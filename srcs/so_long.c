@@ -6,11 +6,10 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:31:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/28 12:02:29 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:24:57 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../MLX42.h"
 #include "../so_long.h"
 
 int		arg_check(int argc, char *arg);

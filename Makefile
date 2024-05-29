@@ -6,7 +6,7 @@
 #    By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 15:13:49 by eperperi          #+#    #+#              #
-#    Updated: 2024/05/28 11:54:52 by eperperi         ###   ########.fr        #
+#    Updated: 2024/05/29 11:15:58 by eperperi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,7 @@ SRC		 =	$(SRC_DIR)so_long.c \
 			$(SRC_DIR)maping.c \
 			$(SRC_DIR)moving.c \
 			$(SRC_DIR)errors_control.c \
-			$(SRC_DIR)path.c \
-			$(SRC_DIR)fastest_path.c 
+			$(SRC_DIR)path.c 
 GNL_SRC  =	$(GNL_DIR)get_next_line.c $(GNL_DIR)get_next_line_utils.c 
 FT_PRINTF_SRC = $(FT_PRINTF_DIR)ft_printf_main.c \
 				$(FT_PRINTF_DIR)mini_hex_lib.c \
@@ -44,7 +43,7 @@ OBJ		 =	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 GNL_OBJ	 =	$(GNL_SRC:$(GNL_DIR)%.c=$(OBJ_DIR)%.o)
 FT_PRINTF_OBJ	 =	$(FT_PRINTF_SRC:$(FT_PRINTF_DIR)%.c=$(OBJ_DIR)%.o)
 LIB		 =	Libft/libft.a
-MLX42	 =	libmlx42.a
+MLX42	 =	MLX42/build/libmlx42.a
 
 $(NAME): $(MLX42) $(OBJ) $(GNL_OBJ) $(FT_PRINTF_OBJ) $(LIB)
 		@$(MAKE) -C Libft
@@ -80,6 +79,7 @@ cleanmlx:
 clean:	
 		@$(MAKE) -C Libft clean
 		@rm -rf $(OBJ_DIR)
+		@rm -f libmlx42.a
 		@echo "$(CYAN)Object files cleaned!$(WHITE)"
 
 fclean:	clean

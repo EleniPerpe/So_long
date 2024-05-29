@@ -6,11 +6,10 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:50 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/28 11:24:15 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:25:19 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../MLX42.h"
 #include "../so_long.h"
 
 #define TILE_SIZE 40

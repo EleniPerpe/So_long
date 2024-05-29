@@ -6,12 +6,11 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:16:26 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/27 21:11:07 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:25:46 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-#include "../MLX42.h"
 
 void	check_map_square(t_game *game);
 void	check_valid_assets(t_game *game);

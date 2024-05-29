@@ -6,7 +6,7 @@
 /*   By: eperperi <eperperi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:58:47 by eperperi          #+#    #+#             */
-/*   Updated: 2024/05/28 11:26:39 by eperperi         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:24:41 by eperperi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "Libft/libft.h"
 # include "Get_next_line/get_next_line.h"
 # include "ft_printf/ft_printf.h"
-# include "MLX42.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_game
 {
